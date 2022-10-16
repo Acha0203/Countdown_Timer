@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
+import Timer from './components/molecules/Timer';
 
 const App: React.FunctionComponent = () => {
   return (
     <div className="App">
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+      <h1 className="text-3xl font-bold text-white">Hello world!</h1>
+      <Timer />
     </div>
   );
 };
