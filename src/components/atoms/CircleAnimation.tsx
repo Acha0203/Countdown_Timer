@@ -3,14 +3,14 @@ import React, { FC, SVGAttributes, useMemo } from 'react';
 interface CircleProps {
   timeSetting: number;
   count: number;
-  showAnimation: boolean;
+  isRunning: boolean;
   color: SVGAttributes<SVGCircleElement>['stroke'];
   r: number;
   strokeWidth: number;
 }
 
 const CircleAnimation: FC<CircleProps> = (props) => {
-  const { timeSetting, count, showAnimation, color, r: outerR, strokeWidth } = props;
+  const { timeSetting, count, isRunning, color, r: outerR, strokeWidth } = props;
 
   const size = useMemo(() => {
     return outerR * 2;
@@ -46,7 +46,7 @@ const CircleAnimation: FC<CircleProps> = (props) => {
             strokeDasharray={`${circumference} 0`}
             className="circle"
             style={{
-              animation: `pie ${timeSetting * 2}s linear ${showAnimation ? 'running' : 'paused'}`,
+              animation: `pie ${timeSetting * 2}s linear ${isRunning ? 'running' : 'paused'}`,
               WebkitAnimationName: 'pie',
             }}
           />

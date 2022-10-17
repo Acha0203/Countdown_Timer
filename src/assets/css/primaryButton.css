@@ -1,0 +1,71 @@
+.blue-button {
+  background-color: #00009b;
+  border: 2px solid #0000f0;
+  box-shadow: 0 0 30px #0000ff;
+}
+
+.blue-button:hover {
+  background-color: #0000eb;
+  border: 2px solid #2f2fff;
+  box-shadow: 0 0 30px #7f7fff;
+}
+
+.blue-button:focus {
+  background-color: #0000cb;
+  border: 2px solid #0f0fff;
+  box-shadow: 0 0 30px #5f5fff;
+}
+
+.blue-button:disabled {
+  background-color: #2f2f2f;
+  border: 2px solid #4b4b4b;
+  box-shadow: 0 0 0 #000000;
+}
+
+.red-button {
+  background-color: #3b003b;
+  border: 2px solid #5b005b;
+  box-shadow: 0 0 30px #5b005b;
+}
+
+.red-button:hover {
+  background-color: #7b007b;
+  border: 2px solid #9b009b;
+  box-shadow: 0 0 30px #c000c0;
+}
+
+.red-button:focus {
+  background-color: #5b005b;
+  border: 2px solid #7b007b;
+  box-shadow: 0 0 30px #a000a0;
+}
+
+.red-button:disabled {
+  background-color: #2f2f2f;
+  border: 2px solid #4b4b4b;
+  box-shadow: 0 0 0 #000000;
+}
+
+.green-button {
+  background-color: #003b3b;
+  border: 2px solid #005b5b;
+  box-shadow: 0 0 30px #005b5b;
+}
+
+.green-button:hover {
+  background-color: #005b5b;
+  border: 2px solid #007b7b;
+  box-shadow: 0 0 30px #00c0c0;
+}
+
+.green-button:focus {
+  background-color: #004b4b;
+  border: 2px solid #006b6b;
+  box-shadow: 0 0 30px #00a0a0;
+}
+
+.green-button:disabled {
+  background-color: #2f2f2f;
+  border: 2px solid #4b4b4b;
+  box-shadow: 0 0 0 #000000;
+}

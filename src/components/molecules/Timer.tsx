@@ -3,13 +3,17 @@ import PrimaryButton from '../atoms/button/PrimaryButton';
 import CircleAnimation from '../atoms/CircleAnimation';
 
 const Timer: FC = () => {
-  const TIME_SETTING = 60;
+  const TIME_SETTING = 10;
+  const RADIUS = 120;
+  const STROKE_WIDTH = 50;
+
   const [count, setCount] = useState(TIME_SETTING);
-  const [showAnimation, setShowAnimation] = useState(false);
+  // const [showAnimation, setShowAnimation] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
   let intervalID = 0;
 
   const countStart = useCallback((): void => {
-    setShowAnimation(true);
+    setIsRunning(true);
     intervalID = window.setInterval(() => {
       setCount((count) => count - 1);
     }, 1000);
@@ -20,7 +24,7 @@ const Timer: FC = () => {
   }, [count]);
 
   const countStop = useCallback((): void => {
-    setShowAnimation(false);
+    setIsRunning(false);
     window.clearInterval(intervalID);
   }, []);
 
@@ -29,16 +33,15 @@ const Timer: FC = () => {
       <CircleAnimation
         timeSetting={TIME_SETTING}
         count={count}
-        showAnimation={showAnimation}
+        isRunning={isRunning}
         color={'blue'}
-        r={50}
-        strokeWidth={50}
+        r={RADIUS}
+        strokeWidth={STROKE_WIDTH}
       />
-      <div className="flex">
+      <div className="flex m-5 justify-around items-center">
         <PrimaryButton
           onClick={() => countStart()}
           className="blue-button"
-          color="blue"
           size="md"
           disabled={count <= 0}
           rounded={true}
@@ -47,13 +50,21 @@ const Timer: FC = () => {
         </PrimaryButton>
         <PrimaryButton
           onClick={() => countStop()}
-          className="blue-button"
-          color="blue"
+          className="red-button"
           size="md"
           disabled={count <= 0}
           rounded={true}
         >
-          stop
+          Stop
+        </PrimaryButton>
+        <PrimaryButton
+          onClick={() => countStop()}
+          className="green-button"
+          size="md"
+          disabled={count <= 0}
+          rounded={true}
+        >
+          Reset
         </PrimaryButton>
       </div>
     </div>
