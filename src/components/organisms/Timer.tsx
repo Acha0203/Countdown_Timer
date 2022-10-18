@@ -46,14 +46,12 @@ const Timer: FC = memo(() => {
   useEffect(() => {
     if (hoursSetting <= 0 && minutesSetting <= 0 && secondsSetting <= 0) {
       countPause();
-    }
-    if (secondsSetting < 0 && minutesSetting > 0) {
+    } else if (secondsSetting < 0 && minutesSetting > 0) {
       setMinutesSetting(((prevMinutesSetting: number) => prevMinutesSetting - 1) as unknown as number);
       setSecondsSetting(59);
-    }
-    if (secondsSetting < 0 && minutesSetting <= 0 && hoursSetting > 0) {
+    } else if (secondsSetting < 0 && minutesSetting <= 0 && hoursSetting > 0) {
       setHoursSetting(((prevHoursSetting: number) => prevHoursSetting - 1) as unknown as number);
-      setMinutesSetting(59);
+      setMinutesSetting(60);
     }
   }, [hoursSetting, minutesSetting, secondsSetting]);
 
