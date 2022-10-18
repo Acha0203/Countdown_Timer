@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 
-interface ButtonType {
+interface ButtonProps {
   block?: boolean;
   children: React.ReactNode;
   className: string;
@@ -22,8 +22,8 @@ const style = {
   },
 };
 
-const PrimaryButton: FC<ButtonType> = memo(
-  ({ block = false, children, className, disabled = false, rounded, size = 'md', submit, onClick }: ButtonType) => (
+const PrimaryButton: FC<ButtonProps> = memo(
+  ({ block = false, children, className, disabled = false, rounded, size = 'md', submit, onClick }: ButtonProps) => (
     <div className="flex justify-center items-center mx-3">
       <button
         type={submit ?? false ? 'submit' : 'button'}

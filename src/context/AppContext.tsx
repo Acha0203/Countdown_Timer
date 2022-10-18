@@ -7,8 +7,12 @@ interface AppContextValue {
   setIsRunning: (isRunning: boolean) => void;
   timeSetting: number;
   setTimeSetting: (timeSetting: number) => void;
-  count: number;
-  setCount: (count: any) => void;
+  hoursSetting: number;
+  setHoursSetting: (hoursSetting: number) => void;
+  minutesSetting: number;
+  setMinutesSetting: (minutesSetting: number) => void;
+  secondsSetting: number;
+  setSecondsSetting: (secondsSetting: number) => void;
 }
 
 const AppContext = createContext({} as AppContextValue);
@@ -18,8 +22,10 @@ export const useAppContext = (): AppContextValue => useContext(AppContext);
 export const AppContextProvider = ({ children }: { children: ReactNode }): ReactElement => {
   const [showTimer, setShowTimer] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
-  const [timeSetting, setTimeSetting] = useState(10);
-  const [count, setCount] = useState(timeSetting);
+  const [timeSetting, setTimeSetting] = useState(0);
+  const [hoursSetting, setHoursSetting] = useState(0);
+  const [minutesSetting, setMinutesSetting] = useState(0);
+  const [secondsSetting, setSecondsSetting] = useState(0);
 
   const value = {
     showTimer,
@@ -28,8 +34,12 @@ export const AppContextProvider = ({ children }: { children: ReactNode }): React
     setIsRunning,
     timeSetting,
     setTimeSetting,
-    count,
-    setCount,
+    hoursSetting,
+    setHoursSetting,
+    minutesSetting,
+    setMinutesSetting,
+    secondsSetting,
+    setSecondsSetting,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

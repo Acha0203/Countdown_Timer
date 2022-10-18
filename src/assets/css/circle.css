@@ -33,17 +33,3 @@ svg {
 .front {
   fill: #000;
 }
-
-/* @-webkit-keyframes pie {
-  50%,
-  100% {
-    stroke-dasharray: 157, 157, 0, 0;
-  }
-} */
-
-/* @keyframes pie {
-  50%,
-  100% {
-    stroke-dasharray: 157, 157, 0, 0;
-  }
-} */

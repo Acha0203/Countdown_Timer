@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, memo, SVGAttributes, useEffect, useMemo } from 'react';
 import { useAppContext } from '../../context/AppContext';
 
 interface CircleProps {
@@ -7,15 +7,22 @@ interface CircleProps {
   strokeWidth: number;
 }
 
-const CircleAnimation: FC<CircleProps> = (props) => {
+const CircleAnimation: FC<CircleProps> = memo((props) => {
   const { color, r: outerR, strokeWidth } = props;
-  const { isRunning, count, timeSetting } = useAppContext();
+  const { isRunning, timeSetting, setTimeSetting, hoursSetting, minutesSetting, secondsSetting } = useAppContext();
 
   const size = useMemo(() => outerR * 2, [outerR]);
 
   const r = useMemo(() => outerR - strokeWidth / 2, [outerR, strokeWidth]);
 
   const circumference = useMemo(() => 2 * Math.PI * r, [r]);
+
+  const getTimeSetting = (hours: number, minutes: number, seconds: number): number =>
+    hours * 360 + minutes * 60 + seconds;
+
+  useEffect(() => {
+    setTimeSetting(getTimeSetting(hoursSetting, minutesSetting, secondsSetting));
+  }, []);
 
   return (
     <>
@@ -46,11 +53,14 @@ const CircleAnimation: FC<CircleProps> = (props) => {
           <circle cx={outerR} cy={outerR} r={outerR - 12} className="front" />
         </svg>
         <div className="seconds">
-          <span className="second">{count}</span>
+          <span className="second">
+            {hoursSetting.toString().padStart(2, '0')}:{minutesSetting.toString().padStart(2, '0')}:
+            {secondsSetting.toString().padStart(2, '0')}
+          </span>
         </div>
       </div>
     </>
   );
-};
+});
 
 export default CircleAnimation;

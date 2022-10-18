@@ -1,20 +1,31 @@
-import React, { FC, useCallback, useEffect } from 'react';
+import React, { FC, memo, useCallback, useEffect } from 'react';
 import { useAppContext } from '../../context/AppContext';
 import PrimaryButton from '../atoms/button/PrimaryButton';
 import CircleAnimation from '../atoms/CircleAnimation';
+import TimeInputFroms from './TimeInputForms';
 
-const Timer: FC = () => {
-  const TIME_SETTING = 10;
+const Timer: FC = memo(() => {
   const RADIUS = 120;
   const STROKE_WIDTH = 50;
-  const { setIsRunning, count, setCount, showTimer, setShowTimer } = useAppContext();
+  const {
+    isRunning,
+    setIsRunning,
+    showTimer,
+    setShowTimer,
+    hoursSetting,
+    minutesSetting,
+    secondsSetting,
+    setHoursSetting,
+    setMinutesSetting,
+    setSecondsSetting,
+  } = useAppContext();
   let intervalID = 0;
 
   const countStart = useCallback((): void => {
     setShowTimer(true);
     setIsRunning(true);
     intervalID = window.setInterval(() => {
-      setCount((prevCount: number) => prevCount - 1);
+      setSecondsSetting(((prevSecondsSetting: number) => prevSecondsSetting - 1) as unknown as number);
     }, 1000);
   }, []);
 
@@ -24,41 +35,53 @@ const Timer: FC = () => {
   }, []);
 
   const countReset = useCallback((): void => {
-    setShowTimer(false);
-    setIsRunning(true);
     window.clearInterval(intervalID);
-    setCount(TIME_SETTING);
+    setIsRunning(false);
+    setShowTimer(false);
+    setHoursSetting(0);
+    setMinutesSetting(0);
+    setSecondsSetting(0);
   }, []);
 
   useEffect(() => {
-    if (count <= 0) {
+    if (hoursSetting <= 0 && minutesSetting <= 0 && secondsSetting <= 0) {
       countPause();
     }
-  }, [count]);
+    if (secondsSetting < 0 && minutesSetting > 0) {
+      setMinutesSetting(((prevMinutesSetting: number) => prevMinutesSetting - 1) as unknown as number);
+      setSecondsSetting(59);
+    }
+    if (secondsSetting < 0 && minutesSetting <= 0 && hoursSetting > 0) {
+      setHoursSetting(((prevHoursSetting: number) => prevHoursSetting - 1) as unknown as number);
+      setMinutesSetting(59);
+    }
+  }, [hoursSetting, minutesSetting, secondsSetting]);
 
   return (
     <div className="flex flex-col justify-center items-center">
       <div className="flex justify-center items-center h-80">
-        {showTimer && <CircleAnimation color={'blue'} r={RADIUS} strokeWidth={STROKE_WIDTH} />}
+        {showTimer ? <CircleAnimation color={'blue'} r={RADIUS} strokeWidth={STROKE_WIDTH} /> : <TimeInputFroms />}
       </div>
       <div className="flex m-5 justify-around items-center">
         <PrimaryButton onClick={() => countReset()} className="cyan-button" size="md" rounded={true}>
           Reset
         </PrimaryButton>
+
         <PrimaryButton
           onClick={() => countStart()}
           className="blue-button"
           size="md"
-          disabled={count <= 0}
+          disabled={(hoursSetting <= 0 && minutesSetting <= 0 && secondsSetting <= 0) || isRunning}
           rounded={true}
         >
           {showTimer ? 'Resume' : 'Start'}
         </PrimaryButton>
+
         <PrimaryButton
           onClick={() => countPause()}
           className="red-button"
           size="md"
-          disabled={count <= 0 || !showTimer}
+          disabled={(hoursSetting <= 0 && minutesSetting <= 0 && secondsSetting <= 0) || !showTimer || !isRunning}
           rounded={true}
         >
           Pause
@@ -66,6 +89,6 @@ const Timer: FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Timer;
