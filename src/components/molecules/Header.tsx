@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
 
-const Header: FC = () => {
-  return (
-    <div className="text-center m-4">
-      <h1 className="text-4xl font-bold text-white">Countdown Timer</h1>
-    </div>
-  );
-};
+const Header: FC = () => (
+  <div className="text-center h-16">
+    <h1 className="text-3xl sm:text-4xl text-white">Countdown Timer</h1>
+  </div>
+);
 
 export default Header;

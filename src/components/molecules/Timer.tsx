@@ -1,4 +1,5 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect } from 'react';
+import { useAppContext } from '../../context/AppContext';
 import PrimaryButton from '../atoms/button/PrimaryButton';
 import CircleAnimation from '../atoms/CircleAnimation';
 
@@ -6,39 +7,44 @@ const Timer: FC = () => {
   const TIME_SETTING = 10;
   const RADIUS = 120;
   const STROKE_WIDTH = 50;
-
-  const [count, setCount] = useState(TIME_SETTING);
-  // const [showAnimation, setShowAnimation] = useState(false);
-  const [isRunning, setIsRunning] = useState(false);
+  const { setIsRunning, count, setCount, showTimer, setShowTimer } = useAppContext();
   let intervalID = 0;
 
   const countStart = useCallback((): void => {
+    setShowTimer(true);
     setIsRunning(true);
     intervalID = window.setInterval(() => {
-      setCount((count) => count - 1);
+      setCount((prevCount: number) => prevCount - 1);
     }, 1000);
   }, []);
 
-  useEffect(() => {
-    if (count <= 0) countStop();
-  }, [count]);
-
-  const countStop = useCallback((): void => {
+  const countPause = useCallback((): void => {
     setIsRunning(false);
     window.clearInterval(intervalID);
   }, []);
 
+  const countReset = useCallback((): void => {
+    setShowTimer(false);
+    setIsRunning(true);
+    window.clearInterval(intervalID);
+    setCount(TIME_SETTING);
+  }, []);
+
+  useEffect(() => {
+    if (count <= 0) {
+      countPause();
+    }
+  }, [count]);
+
   return (
     <div className="flex flex-col justify-center items-center">
-      <CircleAnimation
-        timeSetting={TIME_SETTING}
-        count={count}
-        isRunning={isRunning}
-        color={'blue'}
-        r={RADIUS}
-        strokeWidth={STROKE_WIDTH}
-      />
+      <div className="flex justify-center items-center h-80">
+        {showTimer && <CircleAnimation color={'blue'} r={RADIUS} strokeWidth={STROKE_WIDTH} />}
+      </div>
       <div className="flex m-5 justify-around items-center">
+        <PrimaryButton onClick={() => countReset()} className="cyan-button" size="md" rounded={true}>
+          Reset
+        </PrimaryButton>
         <PrimaryButton
           onClick={() => countStart()}
           className="blue-button"
@@ -46,25 +52,16 @@ const Timer: FC = () => {
           disabled={count <= 0}
           rounded={true}
         >
-          Start
+          {showTimer ? 'Resume' : 'Start'}
         </PrimaryButton>
         <PrimaryButton
-          onClick={() => countStop()}
+          onClick={() => countPause()}
           className="red-button"
           size="md"
-          disabled={count <= 0}
+          disabled={count <= 0 || !showTimer}
           rounded={true}
         >
-          Stop
-        </PrimaryButton>
-        <PrimaryButton
-          onClick={() => countStop()}
-          className="green-button"
-          size="md"
-          disabled={count <= 0}
-          rounded={true}
-        >
-          Reset
+          Pause
         </PrimaryButton>
       </div>
     </div>

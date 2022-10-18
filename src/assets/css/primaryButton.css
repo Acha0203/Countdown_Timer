@@ -46,25 +46,25 @@
   box-shadow: 0 0 0 #000000;
 }
 
-.green-button {
-  background-color: #003b3b;
-  border: 2px solid #005b5b;
-  box-shadow: 0 0 30px #005b5b;
+.cyan-button {
+  background-color: #002b6b;
+  border: 2px solid #004b7b;
+  box-shadow: 0 0 30px #004b7b;
 }
 
-.green-button:hover {
-  background-color: #005b5b;
-  border: 2px solid #007b7b;
-  box-shadow: 0 0 30px #00c0c0;
+.cyan-button:hover {
+  background-color: #00577b;
+  border: 2px solid #0090c0;
+  box-shadow: 0 0 30px #0090c0;
 }
 
-.green-button:focus {
-  background-color: #004b4b;
-  border: 2px solid #006b6b;
-  box-shadow: 0 0 30px #00a0a0;
+.cyan-button:focus {
+  background-color: #00476c;
+  border: 2px solid #0070a0;
+  box-shadow: 0 0 30px #0070a0;
 }
 
-.green-button:disabled {
+.cyan-button:disabled {
   background-color: #2f2f2f;
   border: 2px solid #4b4b4b;
   box-shadow: 0 0 0 #000000;

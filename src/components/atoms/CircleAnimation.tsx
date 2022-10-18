@@ -1,28 +1,21 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
+import { useAppContext } from '../../context/AppContext';
 
 interface CircleProps {
-  timeSetting: number;
-  count: number;
-  isRunning: boolean;
   color: SVGAttributes<SVGCircleElement>['stroke'];
   r: number;
   strokeWidth: number;
 }
 
 const CircleAnimation: FC<CircleProps> = (props) => {
-  const { timeSetting, count, isRunning, color, r: outerR, strokeWidth } = props;
+  const { color, r: outerR, strokeWidth } = props;
+  const { isRunning, count, timeSetting } = useAppContext();
 
-  const size = useMemo(() => {
-    return outerR * 2;
-  }, [outerR]);
+  const size = useMemo(() => outerR * 2, [outerR]);
 
-  const r = useMemo(() => {
-    return outerR - strokeWidth / 2;
-  }, [outerR, strokeWidth]);
+  const r = useMemo(() => outerR - strokeWidth / 2, [outerR, strokeWidth]);
 
-  const circumference = useMemo(() => {
-    return 2 * Math.PI * r;
-  }, [r]);
+  const circumference = useMemo(() => 2 * Math.PI * r, [r]);
 
   return (
     <>
