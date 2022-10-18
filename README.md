@@ -2,6 +2,10 @@
 
 コンピュータサイエンス学習プラットフォーム[Recursion](https://recursionist.io)の課題として作成したカウントダウンタイマーです。ささやかなアプリケーションですが、練習のためReact.js + TypeScriptで開発し、Atomic Designを起用しました。
 
+## Demo
+
+![countdown-timer-movie](https://user-images.githubusercontent.com/74553433/196475191-482fad43-3525-4bfd-90c6-a3b474017365.gif)
+
 ## URL
 
 https://acha0203.github.io/Countdown_Timer/
