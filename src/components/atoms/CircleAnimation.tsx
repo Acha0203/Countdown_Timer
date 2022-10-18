@@ -18,7 +18,7 @@ const CircleAnimation: FC<CircleProps> = memo((props) => {
   const circumference = useMemo(() => 2 * Math.PI * r, [r]);
 
   const getTimeSetting = (hours: number, minutes: number, seconds: number): number =>
-    hours * 360 + minutes * 60 + seconds;
+    hours * 3600 + minutes * 60 + seconds;
 
   useEffect(() => {
     setTimeSetting(getTimeSetting(hoursSetting, minutesSetting, secondsSetting));
