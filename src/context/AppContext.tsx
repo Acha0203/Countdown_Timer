@@ -13,6 +13,8 @@ interface AppContextValue {
   setMinutesSetting: (minutesSetting: number) => void;
   secondsSetting: number;
   setSecondsSetting: (secondsSetting: number) => void;
+  showAlert: boolean;
+  setShowAlert: (showAlert: boolean) => void;
 }
 
 const AppContext = createContext({} as AppContextValue);
@@ -26,6 +28,7 @@ export const AppContextProvider = ({ children }: { children: ReactNode }): React
   const [hoursSetting, setHoursSetting] = useState(0);
   const [minutesSetting, setMinutesSetting] = useState(0);
   const [secondsSetting, setSecondsSetting] = useState(0);
+  const [showAlert, setShowAlert] = useState(false);
 
   const value = {
     showTimer,
@@ -40,6 +43,8 @@ export const AppContextProvider = ({ children }: { children: ReactNode }): React
     setMinutesSetting,
     secondsSetting,
     setSecondsSetting,
+    showAlert,
+    setShowAlert,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
